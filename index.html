@@ -7,12 +7,31 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Styles for the tree animation */
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100px) rotate(var(--rotation)); opacity: 0; }
         }
         .leaf.falling {
             animation: fall 2s ease-in-out forwards;
+        }
+        /* Styles for the news ticker */
+        .news-ticker {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: fixed;
+            bottom: 0;
+            background-color: #f0f0f0;
+            padding: 5px 0;
+        }
+        .news-content {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
     </style>
 </head>
@@ -50,6 +69,10 @@
             </button>
             <p id="result" class="mt-4 text-center text-lg font-semibold"></p>
         </div>
+    </div>
+    <!-- News Ticker -->
+    <div class="news-ticker">
+        <div class="news-content">Loading news...</div>
     </div>
     <script src="script.js"></script>
 </body>
