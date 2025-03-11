@@ -39,3 +39,5 @@ fetch('https://newsapi.org/v2/everything?q=sustainability%20OR%20environment%20O
   .catch(error => {
     document.querySelector('.news-content').textContent = 'Unable to fetch news.';
   });
+
+  //revert
