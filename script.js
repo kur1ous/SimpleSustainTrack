@@ -29,13 +29,25 @@ function calculateFootprint() {
     }
 }
 
+var apikey = '9a23dc11785e49b2b732d486d2b4e93b';
+var api = 'https://newsapi.org/v2/everything?q=keyword&apiKey=$' + apikey;
+
+var req = new Request(url);
+
+fetch(req)
+    .then(function(response) {
+        console.log(response.json());
+    })
+
+
+
 // Fetch and display sustainability news
-fetch('https://newsapi.org/v2/everything?q=sustainability%20OR%20environment%20OR%20%22climate%20change%22&language=en&pageSize=10&apiKey=f3d8d90a61af4757a0c86708315d463e')
-  .then(response => response.json())
-  .then(data => {
-    const headlines = data.articles.map(article => article.title).join(' • ');
-    document.querySelector('.news-content').textContent = headlines;
-  })
-  .catch(error => {
-    document.querySelector('.news-content').textContent = 'Unable to fetch news.';
-  });
+// fetch('https://newsapi.org/v2/everything?q=sustainability%20OR%20environment%20OR%20%22climate%20change%22&language=en&pageSize=10&apiKey=f3d8d90a61af4757a0c86708315d463e')
+//   .then(response => response.json())
+//   .then(data => {
+//     const headlines = data.articles.map(article => article.title).join(' • ');
+//     document.querySelector('.news-content').textContent = headlines;
+//   })
+//   .catch(error => {
+//     document.querySelector('.news-content').textContent = 'Unable to fetch news.';
+//   });
