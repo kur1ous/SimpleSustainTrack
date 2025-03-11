@@ -30,12 +30,28 @@ function calculateFootprint() {
 }
 
 // Fetch and display sustainability news
-fetch('https://newsapi.org/v2/everything?q=sustainability%20OR%20environment%20OR%20%22climate%20change%22&language=en&pageSize=10&apiKey=f3d8d90a61af4757a0c86708315d463e')
-  .then(response => response.json())
-  .then(data => {
-    const headlines = data.articles.map(article => article.title).join(' • ');
-    document.querySelector('.news-content').textContent = headlines;
+fetch('https://newsapi.org/v2/everything?q=sustainability%20OR%20environment%20OR%20%22climate%20change%22&language=en&pageSize=10&apiKey=f3d8d90a61af4757a0c86708315d463e', {
+    method: 'GET',
+    headers: {
+      'Upgrade-Insecure-Requests': '1',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+      'Accept': 'application/json',
+      'Connection': 'keep-alive'
+    },
+    mode: 'cors'
   })
-  .catch(error => {
-    document.querySelector('.news-content').textContent = 'Unable to fetch news.';
-  });
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const headlines = data.articles.map(article => article.title).join(' • ');
+      document.querySelector('.news-content').textContent = headlines;
+    })
+    .catch(error => {
+      console.error('Error fetching news:', error);
+      document.querySelector('.news-content').textContent = 'Unable to fetch news.';
+    });
+  
